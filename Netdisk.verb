@@ -1,0 +1,38 @@
+w_metadata Netdisk apps \
+ title="Netdisk" \
+ publisher="Baidu" \
+ year="2018" \
+ media="download" \
+ file1="BaiduNetdisk_5.7.2.exe" \
+ installed_exe1="$W_APPDATA_WIN/baidu/BaiduNetdisk/BaiduNetdisk.exe" \
+ homepage="http://pan.baidu.com/" \
+ unattended="no"
+
+load_Netdisk()
+{
+	w_download https://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_5.7.2.exe 1f3b9c1b072e80fd220b1f4808b044f45766465f4752c01167df137cd17f8303
+	
+	# Make sure chinese fonts are available
+    w_call fakechinese
+
+	# Other necessities
+	w_call ie8
+
+	w_call msls31
+
+	w_call msvcirt
+
+	w_call riched30
+
+	w_call usp10
+
+	w_call webio
+
+	w_call winhttp
+
+	w_call wininet
+
+	#Install the software
+	cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+}
